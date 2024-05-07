@@ -1,0 +1,41 @@
+name: Job for building ML model.
+run-name: ${{ github.actor }} is building ML model.
+on:
+  # Add the workflow_dispatch event if you want to be able to manually run this workflow from the UI.
+  workflow_dispatch:
+  # Add the push event, so that the workflow runs automatically every time a commit is pushed to a branch called main.
+  push:
+    branches:
+      - dev
+  # Add the pull_request event, so that the workflow runs automatically every time a pull request is created or updated.
+  pull_request:
+jobs:
+  Build_ML_Model:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
+  Push_ML_Model_To_Registry:
+    runs-on: ubuntu-latest
+    needs: Build_ML_Model
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
